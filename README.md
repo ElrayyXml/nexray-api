@@ -24,12 +24,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-API-green.svg?logo=whatsapp)](https://whatsapp.com)
 [![Node.js](https://img.shields.io/badge/Node.js-20%2B-green.svg)](https://nodejs.org)
-[![npm downloads](https://img.shields.io/npm/dt/@elrayyxml/baileys.svg?color=blueviolet&label=Downloads&logo=npm)](https://www.npmjs.com/package/@nexray/api)
+[![npm downloads](https://img.shields.io/npm/dt/@nexray/api.svg?color=blueviolet&label=Downloads&logo=npm)](https://www.npmjs.com/package/@nexray/api)
 [![REST API](https://img.shields.io/badge/REST_API-green.svg)](https://api.nexray.web.id)
 
 </div>
 
-## Contact
+#### Contact
 
 <div align="center">
 
@@ -40,7 +40,7 @@
 
 </div>
 
-## Official Channel
+#### Official Channel
 
 <div align="center">
   <a href="https://whatsapp.com/channel/0029Vb69z8n1dAvztHQTDu3r">
@@ -49,7 +49,7 @@
   
 </div>
 
-## Installation
+#### Installation
 Use the stable version:
 ```bash
 npm install @nexray/api
@@ -57,8 +57,7 @@ npm install @nexray/api
 yarn add @nexray/api
 ```
 
-## package.json
-
+#### package.json
 ```json
 "dependencies": {
   "@nexray/api": "latest"
