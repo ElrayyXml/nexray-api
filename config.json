@@ -1,26 +1,5 @@
 {
   "author": "NexRay",
   "baseURL": "https://api.nexray.web.id",
-  "timeout": 30000,
-  "maxRetries": 5,
-  "retryDelay": 100,
-  "defaultHeaders": {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "User-Agent": "NexRay-API-Client/1.0.0"
-  },
-  "retryStatusCodes": [408, 429, 500, 502, 503, 504],
-  "errorMessages": {
-    "200": "OK - Request successful",
-    "400": "Bad Request - Invalid parameters or missing required fields",
-    "401": "Unauthorized - Invalid or missing authentication",
-    "403": "Forbidden - Access denied",
-    "404": "Not Found - Resource not found",
-    "405": "Method Not Allowed - HTTP method not supported",
-    "429": "Too Many Requests - Rate limit exceeded",
-    "500": "Internal Server Error - Server encountered an error",
-    "502": "Bad Gateway - Invalid response from upstream server",
-    "503": "Service Unavailable - Service temporarily unavailable",
-    "504": "Gateway Timeout - Upstream server timeout"
-  }
+  "userAgent": "NexRay-API-Client/1.0.0"
 }
