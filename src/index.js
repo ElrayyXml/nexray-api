@@ -1,78 +1,101 @@
-/**
- * Core NexRay API Client
- */
-
-const NexRayEngine = require('../engine-requirements');
+const axios = require('axios');
 const config = require('../config.json');
+const utils = require('./utils');
 
-class NexRayAPIClient {
-  constructor(customConfig = {}) {
-    this.engine = new NexRayEngine(customConfig);
+class NexRayAPI {
+  constructor() {
+    this.client = axios.create({
+      baseURL: config.baseURL,
+      headers: utils.getHeaders()
+    });
   }
 
-  // HTTP Methods
-  async get(endpoint, params = {}, options = {}) {
-    return this.engine.get(endpoint, params, options);
+  async get(endpoint, params = {}) {
+    try {
+      const response = await this.client.get(
+        utils.formatEndpoint(endpoint),
+        { params }
+      );
+      return response.data;
+    } catch (error) {
+      return utils.handleError(error);
+    }
   }
 
-  async getBuffer(endpoint, params = {}, options = {}) {
-    return this.engine.getBuffer(endpoint, params, options);
+  async post(endpoint, data = {}) {
+    try {
+      const response = await this.client.post(
+        utils.formatEndpoint(endpoint),
+        data
+      );
+      return response.data;
+    } catch (error) {
+      return utils.handleError(error);
+    }
   }
 
-  async post(endpoint, data = {}, options = {}) {
-    return this.engine.post(endpoint, data, options);
+  async put(endpoint, data = {}) {
+    try {
+      const response = await this.client.put(
+        utils.formatEndpoint(endpoint),
+        data
+      );
+      return response.data;
+    } catch (error) {
+      return utils.handleError(error);
+    }
   }
 
-  async postForm(endpoint, formData = {}, options = {}) {
-    return this.engine.postForm(endpoint, formData, options);
+  async delete(endpoint, params = {}) {
+    try {
+      const response = await this.client.delete(
+        utils.formatEndpoint(endpoint),
+        { params }
+      );
+      return response.data;
+    } catch (error) {
+      return utils.handleError(error);
+    }
   }
 
-  async put(endpoint, data = {}, options = {}) {
-    return this.engine.put(endpoint, data, options);
+  async patch(endpoint, data = {}) {
+    try {
+      const response = await this.client.patch(
+        utils.formatEndpoint(endpoint),
+        data
+      );
+      return response.data;
+    } catch (error) {
+      return utils.handleError(error);
+    }
   }
 
-  async delete(endpoint, params = {}, options = {}) {
-    return this.engine.delete(endpoint, params, options);
+  async getBuffer(endpoint, params = {}) {
+    try {
+      const response = await this.client.get(
+        utils.formatEndpoint(endpoint),
+        { 
+          params, 
+          responseType: 'arraybuffer' 
+        }
+      );
+      return Buffer.from(response.data);
+    } catch (error) {
+      throw utils.handleError(error);
+    }
   }
 
-  async patch(endpoint, data = {}, options = {}) {
-    return this.engine.patch(endpoint, data, options);
-  }
-
-  // Configuration Methods
-  setAuthToken(token) {
-    this.engine.setAuthToken(token);
-    return this;
+  setToken(token) {
+    this.client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   }
 
   setHeader(key, value) {
-    this.engine.setHeader(key, value);
-    return this;
+    this.client.defaults.headers.common[key] = value;
   }
 
   removeHeader(key) {
-    this.engine.removeHeader(key);
-    return this;
-  }
-
-  setBaseURL(baseURL) {
-    this.engine.setBaseURL(baseURL);
-    return this;
-  }
-
-  setTimeout(timeout) {
-    this.engine.setTimeout(timeout);
-    return this;
-  }
-
-  // Info Methods
-  getConfig() {
-    return this.engine.getConfig();
-  }
-
-  getErrorMessage(status) {
-    return this.engine.getErrorMessage(status);
+    delete this.client.defaults.headers.common[key];
   }
 }
 
-module.exports = NexRayAPIClient;
+module.exports = NexRayAPI;
