@@ -1,3 +1,10 @@
+Berikut adalah update untuk file README.md. Saya menambahkan bagian Configuration (untuk set Token/Timeout), POST Request, dan Error Handling agar dokumentasi lebih lengkap sesuai fitur kode yang sudah dibuat sebelumnya.
+
+code
+Markdown
+download
+content_copy
+expand_less
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)](#table-of-contents)
 
 <div align="center">
@@ -56,7 +63,7 @@ yarn add api-nexray
 ```
 
 #### package.json
-```json
+```bash
 "dependencies": {
   "api-nexray": "latest"
 }
@@ -64,22 +71,34 @@ yarn add api-nexray
 
 #### Example
 
-#### Request
+#### Import Module
 ```ts
 const nexray = require('api-nexray');
 # or
 import nexray from 'api-nexray';
+```
 
+#### Headers
+```ts
+nexray.setOptions({
+  headers: {
+  timeout: 30000, // 30 seconds
+  maxRetries: 3   // Retry 3 times on failure
+  }
+});
+```
+
+#### Get Request
+```ts
 const data = await nexray.get('/ai/gemini', {
-              text: 'Halo apa kabar...'
-              }
-       );
-       
-       console.log(data);
+  text: 'Halo apa kabar...'
+});
+
+console.log(data);
 ```
 
 #### Response
-```json
+```bash
 {
   "status": true,
   "author": "NexRay",
@@ -87,15 +106,38 @@ const data = await nexray.get('/ai/gemini', {
 }
 ```
 
-#### Request Buffer
+#### Post Request
 ```ts
-const nexray = require('api-nexray');
-# or
-import nexray from 'api-nexray';
+const response = await nexray.post('/ai/chatgpt', {
+  text: 'Halo apa kabar...'
+});
 
+console.log(response);
+```
+
+#### Get Buffer
+```ts
 const buffer = await nexray.getBuffer('/maker/brat', {
-              text: 'Halo apa kabar...'
-              }
-       );
-       console.log(buffer);
+  text: 'Halo apa kabar...'
+});
+
+console.log(buffer);
+```
+
+#### Bad Request
+```bash
+{
+  "status": false,
+  "author": "NexRay",
+  "error": "400 Bad Request - Invalid parameters or missing required fields"
+}
+```
+
+#### Internal Server Error
+```bash
+{
+  "status": false,
+  "author": "NexRay",
+  "error": "500 Internal Server Error - Server encountered an error"
+}
 ```
